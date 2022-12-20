@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:country_code_picker/country_codes.dart';
 import 'package:country_code_picker/country_localizations.dart';
+import 'package:country_code_picker/country_names.dart';
 import 'package:flutter/cupertino.dart';
 
 mixin ToAlias {}
@@ -50,8 +51,7 @@ class CountryCode {
 
   CountryCode localize(BuildContext context) {
     return this
-      ..name =
-          CountryLocalizations.of(context)?.translate(this.code) ?? this.name;
+      ..name = countryNames.entries.firstWhere((element) => element.key==code,orElse: ()=>MapEntry(code!, name)).value;
   }
 
   factory CountryCode.fromJson(Map<String, dynamic> json) {
